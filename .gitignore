@@ -1,4 +1,5 @@
 _build
+*.out
 **/*DS_Store
 **/*pdf
 **/*ppt
