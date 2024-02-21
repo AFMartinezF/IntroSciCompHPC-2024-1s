@@ -57,4 +57,3 @@ float Summation2(int N){
     return sum;
     }*/
 
-
