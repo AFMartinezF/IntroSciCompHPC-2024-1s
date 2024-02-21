@@ -1,3 +1,5 @@
 _build
 *.out
+num.csv
+.vscode
 **/*DS_Store

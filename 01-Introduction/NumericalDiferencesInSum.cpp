@@ -9,27 +9,21 @@ float Summation1(int N);
 float Summation2(int N);
 
 int main() {
-    cout<<"N"<<setw(20)<<"S1"<<setw(20)<<"S2"<<setw(20)<<"△"<<endl;
-    /*
-    for (int N = 1; N <1000000; N++){
-        std::vector<int> indices(N);
-        std::iota(indices.begin(), indices.end(), 1);
-        float sum1 = Summation1(indices);
-        float sum2 = Summation2(indices);
-        float delta = abs(1-sum1/sum2);
-        if (N%1000 == 0){
-            cout<<N<<setw(20)<<sum1<<setw(20)<<sum2<<setw(13)<<delta<<endl;
-        }
+    cout<<"N,S1,S2,△"<<endl;
+    vector<int> N;
+    for (int i = 10000; i <= 9000000; i += 10000) {
+        N.push_back(i);
     }
-    */
-    int N = 10000; 
-    //vector<int> indices(N);
-    //iota(indices.begin(), indices.end(), 1);
-    float sum1 = Summation1(N);
-    float sum2 = Summation2(N);
-    float delta = abs(1-sum1/sum2);
-    cout<<N<<setw(20)<<sum1<<setw(20)<<sum2<<setw(13)<<delta<<endl;
+    vector<float> delta(N.size());
+    int i = 0;
 
+     for (auto n : N) {
+        float sum1 = Summation1(n);
+        float sum2 = Summation2(n);
+        delta[i] = abs(1-sum1/sum2);
+        cout << n <<','<<sum1<<','<<sum2<<','<<delta[i]<< endl;
+        i = i + 1;
+    } 
     return 0;
 }
 
@@ -40,7 +34,6 @@ float Summation1(int N){
         //cout<<"i: "<<i<<" S1: "<<sum1<<endl;
         //if (N%10 == 0){
             //cout<<i<<setw(20)<<sum1<<setw(20);
-            
         //}
     }
     return sum1;
@@ -59,11 +52,6 @@ float Summation2(int N){
 }
 
 /*float Summation2(int N){
-    for (int i = 0; i < indices.size(); i++){
-            
-
-    }
-
     double sum = std::accumulate(indices.rbegin(), indices.rend(), 0.0,
        [](double partialSum, int i) { return partialSum + 1.0 / i; });
     return sum;
