@@ -1,0 +1,15 @@
+#make -f 4.1Makefile
+all: sumupdown.pdf
+
+sumupdown.pdf: 4.1sumupdown.gp data.txt
+	gnuplot 4.1sumupdown.gp
+
+sumupdown.out: 4.1sumupdown.cpp
+	g++ 4.1sumupdown.cpp -o sumupdown.out
+
+data.txt: sumupdown.out
+	./sumupdown.out > data.txt
+
+#El archivo %.cpp requiere del archivo %.out de mismo nombre % reemplaza el nombre del archivo 
+#%.out: %.cpp 
+#	g++ $^ -o $0

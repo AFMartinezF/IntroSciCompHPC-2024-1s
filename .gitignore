@@ -1,5 +1,9 @@
 _build
 *.out
-num.csv
+*.pdf
+*.txt
+*.pdf
+*.png
+*.csv
 .vscode
 **/*DS_Store
