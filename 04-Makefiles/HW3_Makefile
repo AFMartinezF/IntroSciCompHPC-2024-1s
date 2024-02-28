@@ -1,0 +1,33 @@
+# Compilador
+CC = g++
+# Nombre del ejecutable
+EXECUTABLE = ran.out
+
+DATA_FILES = randomSeed1.txt randomSeed2.txt randomSeed5.txt  # Lista de archivos de datos
+
+all: random_pdf.pdf
+random_pdf.pdf: HW3_ran.ipynb randomSeed1.txt randomSeed2.txt randomSeed5.txt realPDF.txt
+# Convertir el notebook a script
+	jupyter nbconvert --execute HW3_ran.ipynb --to script
+
+# Regla para construir el programa
+$(EXECUTABLE): HW3random_pdf.cpp
+	$(CC) -o $(EXECUTABLE) HW3random_pdf.cpp
+
+# Regla para ejecutar el programa con semilla 1
+randomSeed1.txt: $(EXECUTABLE)
+	./$(EXECUTABLE) 1 5000 3.5 0.4 2.7 4.6 50 > randomSeed1.txt
+
+# Regla para ejecutar el programa con semilla 2
+randomSeed2.txt: $(EXECUTABLE)
+	./$(EXECUTABLE) 2 5000 3.5 0.4 2.7 4.6 50 > randomSeed2.txt
+
+# Regla para ejecutar el programa con semilla 5
+randomSeed5.txt: $(EXECUTABLE)
+	./$(EXECUTABLE) 5 5000 3.5 0.4 2.7 4.6 50 > randomSeed5.txt
+
+# Regla para limpiar archivos generados
+.PHONY: clean
+
+clean:
+	rm -f $(EXECUTABLE) 
