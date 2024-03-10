@@ -1,0 +1,14 @@
+Reporte de correciones realizadas sobre el código:
+
+1) Se modifico la indentación para mejor legibilidad, se añadio ";" donde hacian falta.
+2) Se añadieron y modificaron lineas de codigo en la función main para probar las funciones y observar los valores
+   retornados para distintos casos.
+3) Se interpreto la función foo como una función que deberia aplicar operaciones aritmeticas sobre a y b pero que
+   deberia evitar el error "runtime error: division by zero" en la linea 28, se modifico la función foo de manera 
+   que retornara 0 y mostrar una advertencia en pantalla cuando se trataba de dividir por cero.   
+4) Se interpreto que la función foo deberia devolver |a|+a-b por lo que no se modifico.
+5) Se interpreto que la función baz devuelve el valor de sqrt(|x|) por lo que se modifico para que funcionara así 
+   y nunca se tratara de calcular la raiz cuadrada de un número negativo. 
+
+Con estas correciones el codigo no presenta ningún error cuando se ejecuta con sanitizers, valgrind ni ningún warning 
+cuando se ejecuta con la bandera -Wall
