@@ -4,6 +4,7 @@ _build
 *.pdf
 *.txt
 !reporte.txt
+!
 *.png
 *.csv
 **/*DS_Store
