@@ -10,5 +10,6 @@ Reporte de correciones realizadas sobre el código:
 5) Se interpreto que la función baz devuelve el valor de sqrt(|x|) por lo que se modifico para que funcionara así 
    y nunca se tratara de calcular la raiz cuadrada de un número negativo. 
 
-Con estas correciones el codigo no presenta ningún error cuando se ejecuta con sanitizers, valgrind ni ningún warning 
+Con estas correciones el codigo no presenta ningún error cuando se ejecuta con sanitizers (-fsanitize=leak,address,undefined),
+valgrind (valgrind --tool=memcheck --track-origins=yes --leak-check= full ./a.out), ni ningún warning 
 cuando se ejecuta con la bandera -Wall
