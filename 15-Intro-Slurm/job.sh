@@ -1,4 +1,3 @@
-#Para descargar este archivo desde el servidor  scp -P 443 anmartinezf@168.176.35.111:/home/anmartinezf/job.sh /home/angel
 #!/bin/bash
 
 #Comentarios interpretados por slurm:
