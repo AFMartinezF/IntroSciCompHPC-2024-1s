@@ -42,6 +42,9 @@ void identityMpi(int N, int pid, int np){
     auto identity_local =  identityRows(N, init_local, final_local); //auto hace que el compilador deduzca el tipo de dato usado
 
     int tag = 0;
+    double tam = 0;
+    double bandwidth = 0;
+    double t = 0;
     if (pid == 0) {
         //Imprimir los datos del proceso 0
         for (int i = 0; i < Nlocal; ++i) {
@@ -54,8 +57,13 @@ void identityMpi(int N, int pid, int np){
         for(int ipid = 1; ipid < np; ipid++) {
 	    //Recibir los datos de los demas procesos
 	    std::vector<int> recv_rows(Nlocal*N);
+	    double starttime = MPI_Wtime();
             MPI_Recv(recv_rows.data(), recv_rows.size(), MPI_INT, ipid, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
+            double endtime = MPI_Wtime();
+            t = endtime - starttime;
+            tam = recv_rows.size() * sizeof(int);  // Tamaño en bytes del mensaje
+            bandwidth += tam /((t/2)*(1024*1024));  // Bandwidth en MB/s
 	    //Imprimir los datos
 	    for (int i = 0; i < Nlocal; ++i) {
                 for (int j = 0; j < N; ++j) {
@@ -64,6 +72,9 @@ void identityMpi(int N, int pid, int np){
                 std::cout << std::endl;
                 }
 	    }
+	//Calculo de ancho de banda promedio
+	bandwidth = bandwidth/np;
+	std::cout<<"El ancho de banda es: "<<bandwidth<<" (MB/s)"<<std::endl;
         } else {
        //Enviar el trozo de matriz al pid 0
        MPI_Send(identity_local.data(), identity_local.size(), MPI_INT, 0, tag, MPI_COMM_WORLD);
